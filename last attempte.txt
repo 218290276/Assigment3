@@ -1,0 +1,81 @@
+/*
+ * To change this license header, choose License Headers cus Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template cus the editor.
+ */
+package com.mycompany.project4.cput;
+import java.io.*;
+import java.io.IOException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.util.Properties;
+import java.io.ObjectInputStream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+
+/**
+ *
+ * @author Arisky
+ */
+public class Run {
+    
+    /**
+     *
+     * @param args
+     * @throws java.io.IOException
+     */
+    public static void main(String[] args)throws IOException, ClassNotFoundException {
+ // DESERIALIZATION
+
+
+
+
+   // Reading Person/Customer
+  
+      try (FileInputStream file = new FileInputStream("stakeholder.ser"); ObjectInputStream cus = new ObjectInputStream(file)) {
+          Object person = null;
+          
+          while ((person  = cus.readObject()) != null) {
+              if ((person instanceof Customer)) {
+                 ArrayList<String> customer = new ArrayList<String>();
+                 person.toString();
+                 Collections.sort(customer);  // Sort cars
+    for (String i : customer) {
+      System.out.println(i);
+              }
+          }
+          
+      }
+  } catch (IOException i) {
+       System.out.println("Success");
+      } catch (ClassNotFoundException c) {
+         System.out.println("Stake not found");
+      } 
+  //Reading Supplier 
+  System.out.println("====================================================================================================================");
+
+       try{
+      try (FileInputStream file = new FileInputStream("stakeholder.ser")) {
+          ObjectInputStream su = new ObjectInputStream(file);
+          
+          Object mfacture = null;
+          
+          while (( mfacture  = su.readObject()) != null) {
+              if (( mfacture instanceof Supplier)) {
+                
+                  System.out.println(((Supplier)  mfacture).toString());
+              }
+          }
+          su.close();
+      }
+  } catch (IOException i) {
+       System.out.println("Success");
+      } catch (ClassNotFoundException c) {
+         System.out.println("Object not found");
+      } 
+     
+        // ARRAYlist Dinamic data strcture
+    
+    }
+}
